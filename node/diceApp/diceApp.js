@@ -1,9 +1,12 @@
 var express = require("express"),
 	path = require("path"),
 	morgan = require("morgan"),
+	underscore = require("underscore"),
+	mustache = require("mustache"),
 	port = process.env.PORT || 3000,
 	app = express();
 
+app.use(express.bodyParser());
 app.use(morgan("dev"));
 app.use(express.static("static"));
 app.use(logErr);
@@ -15,19 +18,8 @@ function logErr(err, rq, rs, next){
 
 app.post("/", function(rq, rs, next) {
 	console.log('D' + rq.body.diceForm);
-	_.templateSettings.variable = "dice";
-	
-	var template = _.template(
-						 $( "script.template" ).html()
-	);
-
-	var templateData = function getRandomInt(min, max) {
-	    return Math.floor(Math.random() * (rq.body.diceForm - min + 1)) + min;
-	}
-
-	$( "br" ).after(
-			template( templateData )
-	);
+	var rng = _.random(1, rq.body.diceForm);
+	rs.render("index.html", { locals{rng: rng}});
 });
 
 app.listen(port, function() {
