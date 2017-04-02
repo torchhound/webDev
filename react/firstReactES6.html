@@ -7,8 +7,8 @@
   <body>
     <div id="react-app"></div>
 
-    <script src="https://cdn.jsdelivr.net/react/0.14.0-rc1/react.js"></script>
-    <script src="https://cdn.jsdelivr.net/react/0.14.0-rc1/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.1.0/react-dom.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script type="text/babel">
 
@@ -26,38 +26,36 @@
 		};
 
 		render() {
-			return (
+			return 
 				<li>
 					<h2>{this.props.name}</h2>
 					<h3>{this.props.description}</h3>
 					<a href={"mailto:" + this.props.email}>{this.props.email}</a>
 				</li>
-			);
 		};
 	};
 
 	class ListComponent extends React.Component {
 		render() {
-			return (
+			return 
 				contacts.filter(function(contact) { return contact.email; })
 					.map(function(contact) {<ListElementComponent name={contact.name} description={contact.description} email={contact.email}/>});
-			);
 		};
 	};
 
 	class ContactsComponent extends React.Component {
 		render() {
-			return (
+			return 
 				<div>
 					<h1>Contacts</h1>
 					<ul>
 						<ListComponent/>
 					</ul>
 				</div>
-			);
 		};
 	};
 
+	console.log(React.isValidElement(ListElementComponent));
 	console.log(React.isValidElement(ListComponent));
 	console.log(React.isValidElement(ContactsComponent));
   	ReactDOM.render(<ContactsComponent/>, document.getElementById('react-app'));
