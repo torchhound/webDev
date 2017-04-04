@@ -2,7 +2,7 @@
   "name": "demo",
   "private": true,
   "scripts": {
-    "build": "pulp build --to dist/demo.js"
+    "build": "pulp build -O --to dist/demo.js"
   },
   "devDependencies": {
     "pulp": "^10.0.0",
